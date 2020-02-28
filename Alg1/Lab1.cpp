@@ -1,26 +1,35 @@
-#include <fstream>
-#include <iostream>
+#include <windows.h>
 
-using namespace std;
-
-typedef struct data
+typedef struct value
 {
-	int num;
-	string str = NULL;
+	DWORD key;
+	char* chp;
 };
 
 int main(int argc, char* argv[])
 {
-	if (argc != 2)
+	if (argc != 3)
 		return 1;
-	int N;
-	ifstream fin;
-	ofstream fout;
-	fin.open(argv[0]);
-	fout.open(argv[1]);
-	if (!fin || !fout)
+	HANDLE hFile, hInputMapping, hOutputMapping;
+	__int64 qwInputSize = 0;
+	if ((hFile = CreateFileA(argv[1], GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr)) == INVALID_HANDLE_VALUE)
 		return 2;
-	fin >> N;
+	if (!GetFileSizeEx(hFile, (PLARGE_INTEGER)(&qwInputSize)))
+	{
+		CloseHandle(hFile);
+		return 2;
+	}
+	if ((hInputMapping = CreateFileMappingA(hFile, NULL, PAGE_READONLY, 0, 0, NULL)) == nullptr)
+	{
+		CloseHandle(hFile);
+		return 2;
+	}
+	CloseHandle(hFile);
+	unsigned char* cpInputMap = (unsigned char*)MapViewOfFile(hInputMapping, FILE_MAP_READ, 0, 0, qwInputSize);
+	if (cpInputMap == nullptr)
+	{
+		CloseHandle(hInputMapping);
+		return 2;
+	}
 
-	return 0;
 }
