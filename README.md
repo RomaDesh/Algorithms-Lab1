@@ -10,6 +10,7 @@ Requirements:
 > lab1 InputFile OutputFile 
 
 Here InputFile is the name of the file containing the source data, OutputFile is the name of the file containing the result of the work.
+
 5. The source data file should be a text file, on the first line of which there is a non-negative integer N equal to the number of pairs to be sorted, and on the following N lines - the pairs to be sorted themselves, with k and v values separated by one space. An example of a source data file:
 
 > 4
