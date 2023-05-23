@@ -13,17 +13,25 @@ Here InputFile is the name of the file containing the source data, OutputFile is
 5. The source data file should be a text file, on the first line of which there is a non-negative integer N equal to the number of pairs to be sorted, and on the following N lines - the pairs to be sorted themselves, with k and v values separated by one space. An example of a source data file:
 
 > 4
+
 > 3 bla
+
 > 2 bla bla
+
 > 1 blabla
+
 > 0 blablabla
 
 6. The file containing the result of the work has the same format as the source data file. The file should contain pairs (k, v) sorted in ascending order. An example of a result file:
 
 > 4
+
 > 0 blablabla
+
 > 1 blabla 
+
 > 2 bla bla 
+
 > 3 bla
 
 7. In case of successful completion of work, the program should return an error code of 0.
